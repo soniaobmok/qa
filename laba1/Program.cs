@@ -6,10 +6,11 @@ namespace laba1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            ExceptionManager.handle(new DivideByZeroException());
-            ExceptionManager.handle(new InvalidOperationException());
-            Console.ReadKey();
+            ExceptionManager.Handle(new DivideByZeroException());
+            ExceptionManager.Handle(new InvalidOperationException());
+            ExceptionManager.Handle(new ArithmeticException());
+            Console.WriteLine($"Critical: {ExceptionManager.GetCounts().Item1}\nOrdinary: {ExceptionManager.GetCounts().Item2}");
+
         }
     }
 }
