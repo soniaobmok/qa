@@ -4,18 +4,17 @@ using System.Text;
 
 namespace laba1
 {
-    class ExceptionManager
+    public class ExceptionManager
     {
-        private static int critical = 0;
-        private static int ordinary = 0;
-        public static bool IsCritical(Exception e)
+        private static Int16 critical = 0;
+        private static Int16 ordinary = 0;
+        public static Boolean IsCritical(Exception e)
         {
-            if (
+            return (
                 e is DivideByZeroException ||
                 e is FormatException ||
                 e is ArithmeticException
-            ) return true;
-            return false;
+            );
         }
         public static void Handle(Exception e)
         {
@@ -24,7 +23,7 @@ namespace laba1
             else
                 { ordinary++; }
         }
-        public static (int, int) GetCounts()
+        public static (Int16 critical, Int16 ordinary) GetCounts()
         {
             return (critical, ordinary);
         }
