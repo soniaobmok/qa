@@ -7,44 +7,32 @@ namespace laba1.Tests
     [TestFixture]
     public class ExceptionManagerTests
     {
-        [Test]
-        public void IsCritical_DivideByZeroException_returnsTrue()
+        private readonly static object[] criticalExceptions =
         {
-            //Arrange
-            Exception ex = new DivideByZeroException();
-            //Act
-            Boolean result = ExceptionManager.IsCritical(ex);
-            //Assert
-            Assert.That(result,Is.True);
-        }
+            new object[] {new DivideByZeroException()},
+            new object[] {new FormatException()},
+            new object[] {new ArithmeticException()},
+        };
 
-        [Test]
-        public void IsCritical_FormatException_returnsTrue()
+        private readonly static object[] ordinaryExceptions =
         {
-            //Arrange
-            Exception ex = new FormatException();
-            //Act
-            Boolean result = ExceptionManager.IsCritical(ex);
-            //Assert
-            Assert.That(result, Is.True);
-        }
+            new object[] {new NullReferenceException()},
+            new object[] {new InvalidCastException()},
+            new object[] {new IndexOutOfRangeException()},
+        };
 
-        [Test]
-        public void IsCritical_ArithmeticException_returnsTrue()
+        [Test, TestCaseSource("criticalExceptions")]
+        public void Iscritical_criticalException_returnsTrue(Exception ex)
         {
-            //Arrange
-            Exception ex = new ArithmeticException();
             //Act
             Boolean result = ExceptionManager.IsCritical(ex);
             //Assert
             Assert.That(result, Is.True);
         }
 
-        [Test]
-        public void IsCritical_NullReferenceException_returnsFalse()
+        [Test, TestCaseSource("ordinaryExceptions")]
+        public void Iscritical_ordinatyException_returnsFalse(Exception ex)
         {
-            //Arrange
-            Exception ex = new NullReferenceException();
             //Act
             Boolean result = ExceptionManager.IsCritical(ex);
             //Assert
