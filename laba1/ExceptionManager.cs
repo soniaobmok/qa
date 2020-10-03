@@ -6,8 +6,8 @@ namespace laba1
 {
     public class ExceptionManager
     {
-        private static Int16 critical;
-        private static Int16 ordinary;
+        private static UInt16 critical;
+        private static UInt16 ordinary;
         public static Boolean IsCritical(Exception e)
         {
             return (
@@ -23,7 +23,7 @@ namespace laba1
             else
                 { ordinary++; }
         }
-        public static (Int16 critical, Int16 ordinary) GetCounts()
+        public static (UInt16 critical, UInt16 ordinary) GetCounts()
         {
             return (critical, ordinary);
         }
