@@ -9,10 +9,11 @@ namespace laba1
     {
         private static UInt16 critical;
         private static UInt16 ordinary;
+        private static UInt16 sendError;
 
         public static Boolean IsCritical(Exception e)
         {
-            using (StreamReader reader = new StreamReader("D:\\qa\\laba1\\config.txt"))
+            using (StreamReader reader = new StreamReader("D:\\qa\\laba1\\config.txt")) // TODO: fix the path
             {
                 string line;
 
@@ -27,14 +28,24 @@ namespace laba1
         public static void Handle(Exception e)
         {
             if (IsCritical(e))
-                { critical++; }
+            { 
+                critical++;
+
+                if (!SendToServer(e))
+                    sendError++;
+            }
             else
                 { ordinary++; }
         }
 
-        public static (UInt16 critical, UInt16 ordinary) GetCounts()
+        public static (UInt16 critical, UInt16 ordinary, UInt16 sendError) GetCounts()
         {
-            return (critical, ordinary);
+            return (critical, ordinary, sendError);
+        }
+
+        public static Boolean SendToServer(Exception e)
+        {
+            return ExceptionServer.ReceiveException(e.GetType().ToString());
         }
     }
 }
