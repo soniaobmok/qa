@@ -7,17 +7,11 @@ namespace ExceptionManager.Tests
     [TestFixture]
     public class ExceptionManagerTests
     {
-        private ExceptionManager managerTrue = new ExceptionManager
-        {
-            criticalExceptionDeterminator = new CriticalExceptionStubDeterminatorTrue(),
-            exceptionInformer = new CriticalExceptionStubInformerTrue()
-        };
+        private ExceptionManager managerTrue =
+            ExceptionManagerFactory.CreateStubExceptionManagerTrue();
 
-        private ExceptionManager managerFalse = new ExceptionManager
-        {
-            criticalExceptionDeterminator = new CriticalExceptionStubDeterminatorFalse(),
-            exceptionInformer = new CriticalExceptionStubInformerFalse()
-        };
+        private ExceptionManager managerFalse =
+            ExceptionManagerFactory.CreateStubExceptionManagerFalse();
 
         private readonly static object[] criticalExceptions =
         {

@@ -6,10 +6,8 @@ namespace ExceptionManager
     {
         static void Main(string[] args)
         {
-            var result = new ExceptionManager{
-                criticalExceptionDeterminator = new CriticalExceptionConfigurableDeterminator(),
-                exceptionInformer = new CriticalExceptionServerInformer()
-            }
+            var result = ExceptionManagerFactory
+                .CreateSimpleExceptionManager()
                 .Handle(new DivideByZeroException())
                 .Handle(new InvalidOperationException())
                 .Handle(new ArithmeticException())
