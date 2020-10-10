@@ -1,3 +1,3 @@
-﻿DivideByZeroException
-FormatException
-ArithmeticException
+﻿System.DivideByZeroException
+System.FormatException
+System.ArithmeticException
