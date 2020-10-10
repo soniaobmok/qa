@@ -6,12 +6,14 @@ namespace laba1
     {
         static void Main(string[] args)
         {
-            ExceptionManager.Handle(new DivideByZeroException());
-            ExceptionManager.Handle(new InvalidOperationException());
-            ExceptionManager.Handle(new ArithmeticException());
+            ExceptionManager exceptionManager = new ExceptionManager();
 
-            Console.WriteLine($"Critical: {ExceptionManager.GetCounts().Item1}\nOrdinary: {ExceptionManager.GetCounts().Item2}");
-            Console.WriteLine($"Send Errors: {ExceptionManager.GetCounts().Item3}");
+            exceptionManager.Handle(new DivideByZeroException());
+            exceptionManager.Handle(new InvalidOperationException());
+            exceptionManager.Handle(new ArithmeticException());
+
+            Console.WriteLine($"Critical: {exceptionManager.GetCounts().Item1}\nOrdinary: {exceptionManager.GetCounts().Item2}");
+            Console.WriteLine($"Send Errors: {exceptionManager.GetCounts().Item3}");
 
         }
     }

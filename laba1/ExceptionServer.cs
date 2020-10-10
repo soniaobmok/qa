@@ -6,9 +6,14 @@ namespace laba1
 {
     class ExceptionServer
     {
-        private static List<string> exceptionList = new List<string>();
+        private List<string> exceptionList;
 
-        public static Boolean ReceiveException(string exception)
+        public ExceptionServer()
+        {
+            exceptionList = new List<string>();
+        }
+
+        public Boolean ReceiveException(string exception)
         {
             if (string.IsNullOrEmpty(exception))
             {

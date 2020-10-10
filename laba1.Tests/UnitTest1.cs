@@ -24,8 +24,9 @@ namespace laba1.Tests
         [Test, TestCaseSource("criticalExceptions")]
         public void Iscritical_criticalException_returnsTrue(Exception ex)
         {
+            ExceptionManager exceptionManager = new ExceptionManager();
             //Act
-            Boolean result = ExceptionManager.IsCritical(ex);
+            Boolean result = exceptionManager.IsCritical(ex);
             //Assert
             Assert.That(result, Is.True);
         }
@@ -33,8 +34,9 @@ namespace laba1.Tests
         [Test, TestCaseSource("ordinaryExceptions")]
         public void Iscritical_ordinatyException_returnsFalse(Exception ex)
         {
+            ExceptionManager exceptionManager = new ExceptionManager();
             //Act
-            Boolean result = ExceptionManager.IsCritical(ex);
+            Boolean result = exceptionManager.IsCritical(ex);
             //Assert
             Assert.That(result, Is.False);
         }
@@ -42,12 +44,13 @@ namespace laba1.Tests
         [Test]
         public void Handle_CriticalException_IncrimentsCriticalExceptionCounter()
         {
+            ExceptionManager exceptionManager = new ExceptionManager();
             //Arrange
-            UInt16 before = ExceptionManager.GetCounts().critical;
+            UInt16 before = exceptionManager.GetCounts().critical;
             Exception ex = new DivideByZeroException();
             //Act
-            ExceptionManager.Handle(ex);
-            UInt16 result = ExceptionManager.GetCounts().critical;
+            exceptionManager.Handle(ex);
+            UInt16 result = exceptionManager.GetCounts().critical;
             //Assert
             Assert.That(result, Is.EqualTo(before + 1));
         }
@@ -55,12 +58,13 @@ namespace laba1.Tests
         [Test]
         public void Handle_OrdinatyException_IncrimentsOrdinaryExceptionCounter()
         {
+            ExceptionManager exceptionManager = new ExceptionManager();
             //Arrange
-            UInt16 before = ExceptionManager.GetCounts().ordinary;
+            UInt16 before = exceptionManager.GetCounts().ordinary;
             Exception ex = new NullReferenceException();
             //Act
-            ExceptionManager.Handle(ex);
-            UInt16 result = ExceptionManager.GetCounts().ordinary;
+            exceptionManager.Handle(ex);
+            UInt16 result = exceptionManager.GetCounts().ordinary;
             //Assert
             Assert.That(result, Is.EqualTo(before + 1));
         }

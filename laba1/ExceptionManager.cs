@@ -5,13 +5,13 @@ using System.Text;
 
 namespace laba1
 {
-    public class ExceptionManager
+    public class ExceptionManager : IExceptionManager, IExceptionSender
     {
         private static UInt16 critical;
         private static UInt16 ordinary;
         private static UInt16 sendError;
 
-        public static Boolean IsCritical(Exception e)
+        public Boolean IsCritical(Exception e)
         {
             using (StreamReader reader = new StreamReader("D:\\qa\\laba1\\config.txt")) // TODO: fix the path
             {
@@ -25,27 +25,33 @@ namespace laba1
             }
         }
 
-        public static void Handle(Exception e)
+        public void IncErrorCount()
+        {
+            sendError++;
+        }
+
+        public void Handle(Exception e)
         {
             if (IsCritical(e))
             { 
                 critical++;
 
                 if (!SendToServer(e))
-                    sendError++;
+                    IncErrorCount();
             }
             else
                 { ordinary++; }
         }
 
-        public static (UInt16 critical, UInt16 ordinary, UInt16 sendError) GetCounts()
+        public (UInt16 critical, UInt16 ordinary, UInt16 sendError) GetCounts()
         {
             return (critical, ordinary, sendError);
         }
 
-        public static Boolean SendToServer(Exception e)
+        public Boolean SendToServer(Exception e)
         {
-            return ExceptionServer.ReceiveException(e.GetType().ToString());
+            ExceptionServer server = new ExceptionServer();
+            return server.ReceiveException(e.GetType().ToString());
         }
     }
 }
