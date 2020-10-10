@@ -2,20 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace laba1
+namespace ExceptionManager
 {
-    class ExceptionServer
+    public static class ExceptionServer
     {
-        private List<string> exceptionList;
+        private static readonly List<String> exceptionList = new List<String>();
 
-        public ExceptionServer()
+        public static Boolean ReceiveException(String exception)
         {
-            exceptionList = new List<string>();
-        }
-
-        public Boolean ReceiveException(string exception)
-        {
-            if (string.IsNullOrEmpty(exception))
+            if (String.IsNullOrEmpty(exception))
             {
                 Console.WriteLine("Error while receiving exception! Exception is null.");
                 return false;
@@ -24,7 +19,8 @@ namespace laba1
             try
             {
                 exceptionList.Add(exception);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine("Error while receiving exception! " + e.Message);
                 return false;

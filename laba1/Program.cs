@@ -1,20 +1,20 @@
 ﻿using System;
 
-namespace laba1
+namespace ExceptionManager
 {
     class Program
     {
         static void Main(string[] args)
         {
-            ExceptionManager exceptionManager = new ExceptionManager();
-
-            exceptionManager.Handle(new DivideByZeroException());
-            exceptionManager.Handle(new InvalidOperationException());
-            exceptionManager.Handle(new ArithmeticException());
-
-            Console.WriteLine($"Critical: {exceptionManager.GetCounts().Item1}\nOrdinary: {exceptionManager.GetCounts().Item2}");
-            Console.WriteLine($"Send Errors: {exceptionManager.GetCounts().Item3}");
-
+            var result = new ExceptionManager(
+                new CriticalExceptionConfigurableDeterminator(),
+                new CriticalExceptionServerInformer()
+            )
+                .Handle(new DivideByZeroException())
+                .Handle(new InvalidOperationException())
+                .Handle(new ArithmeticException())
+                .GetStats();
+            Console.WriteLine(result);
         }
     }
 }

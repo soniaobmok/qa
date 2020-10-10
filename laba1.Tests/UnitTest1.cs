@@ -1,12 +1,24 @@
 using NUnit.Framework;
 using System;
-using laba1;
+using ExceptionManager;
 
-namespace laba1.Tests
+namespace ExceptionManager.Tests
 {
     [TestFixture]
     public class ExceptionManagerTests
     {
+        private ExceptionManager managerTrue = new ExceptionManager
+        (
+            new CriticalExceptionStubDeterminatorTrue(),
+            new CriticalExceptionStubInformerTrue()
+        );
+
+        private ExceptionManager managerFalse = new ExceptionManager
+        (
+            new CriticalExceptionStubDeterminatorFalse(),
+            new CriticalExceptionStubInformerFalse()
+        );
+
         private readonly static object[] criticalExceptions =
         {
             new object[] {new DivideByZeroException()},
@@ -24,9 +36,8 @@ namespace laba1.Tests
         [Test, TestCaseSource("criticalExceptions")]
         public void Iscritical_criticalException_returnsTrue(Exception ex)
         {
-            ExceptionManager exceptionManager = new ExceptionManager();
             //Act
-            Boolean result = exceptionManager.IsCritical(ex);
+            Boolean result = managerTrue.IsCritical(ex);
             //Assert
             Assert.That(result, Is.True);
         }
@@ -34,9 +45,8 @@ namespace laba1.Tests
         [Test, TestCaseSource("ordinaryExceptions")]
         public void Iscritical_ordinatyException_returnsFalse(Exception ex)
         {
-            ExceptionManager exceptionManager = new ExceptionManager();
             //Act
-            Boolean result = exceptionManager.IsCritical(ex);
+            Boolean result = managerFalse.IsCritical(ex);
             //Assert
             Assert.That(result, Is.False);
         }
@@ -44,13 +54,16 @@ namespace laba1.Tests
         [Test]
         public void Handle_CriticalException_IncrimentsCriticalExceptionCounter()
         {
-            ExceptionManager exceptionManager = new ExceptionManager();
             //Arrange
-            UInt16 before = exceptionManager.GetCounts().critical;
             Exception ex = new DivideByZeroException();
+            UInt16 before = managerTrue
+                .GetStats()
+                .critical;
             //Act
-            exceptionManager.Handle(ex);
-            UInt16 result = exceptionManager.GetCounts().critical;
+            UInt16 result = managerTrue
+                .Handle(ex)
+                .GetStats()
+                .critical;
             //Assert
             Assert.That(result, Is.EqualTo(before + 1));
         }
@@ -58,13 +71,16 @@ namespace laba1.Tests
         [Test]
         public void Handle_OrdinatyException_IncrimentsOrdinaryExceptionCounter()
         {
-            ExceptionManager exceptionManager = new ExceptionManager();
             //Arrange
-            UInt16 before = exceptionManager.GetCounts().ordinary;
+            UInt16 before = managerFalse
+                .GetStats()
+                .ordinary;
             Exception ex = new NullReferenceException();
             //Act
-            exceptionManager.Handle(ex);
-            UInt16 result = exceptionManager.GetCounts().ordinary;
+            ;
+            UInt16 result = managerFalse
+                .Handle(ex)
+                .GetStats().ordinary;
             //Assert
             Assert.That(result, Is.EqualTo(before + 1));
         }
