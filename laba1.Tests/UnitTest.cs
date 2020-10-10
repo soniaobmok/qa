@@ -8,16 +8,16 @@ namespace ExceptionManager.Tests
     public class ExceptionManagerTests
     {
         private ExceptionManager managerTrue = new ExceptionManager
-        (
-            new CriticalExceptionStubDeterminatorTrue(),
-            new CriticalExceptionStubInformerTrue()
-        );
+        {
+            criticalExceptionDeterminator = new CriticalExceptionStubDeterminatorTrue(),
+            exceptionInformer = new CriticalExceptionStubInformerTrue()
+        };
 
         private ExceptionManager managerFalse = new ExceptionManager
-        (
-            new CriticalExceptionStubDeterminatorFalse(),
-            new CriticalExceptionStubInformerFalse()
-        );
+        {
+            criticalExceptionDeterminator = new CriticalExceptionStubDeterminatorFalse(),
+            exceptionInformer = new CriticalExceptionStubInformerFalse()
+        };
 
         private readonly static object[] criticalExceptions =
         {

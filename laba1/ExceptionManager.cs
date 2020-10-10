@@ -7,16 +7,12 @@ namespace ExceptionManager
         private static UInt16 critical;
         private static UInt16 ordinary;
 
-        private readonly ICriticalExceptionDeterminator criticalExceptionDeterminator;
-        private readonly ICriticalExceptionInformer exceptionInformer;
+        //private readonly ICriticalExceptionDeterminator criticalExceptionDeterminator;
+        //private readonly ICriticalExceptionInformer exceptionInformer;
 
-        public ExceptionManager(
-            ICriticalExceptionDeterminator determinator,
-            ICriticalExceptionInformer informer)
-        {
-            criticalExceptionDeterminator = determinator;
-            exceptionInformer = informer;
-        }
+        public ICriticalExceptionDeterminator criticalExceptionDeterminator { get; set; }
+        public ICriticalExceptionInformer exceptionInformer { get; set; }
+        public ExceptionManager() { }
 
         public (UInt16 critical, UInt16 ordinary) GetStats()
         {
