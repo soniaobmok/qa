@@ -7,7 +7,8 @@ namespace ExceptionManager
     {
         public bool determinate(Exception e)
         {
-            using (StreamReader reader = new StreamReader("C:\\Users\\megag\\Desktop\\qa\\laba1\\config.txt")) // todo: fix the path
+            var config = Properties.Resources.config;
+            using (StreamReader reader = new StreamReader("..\\..\\..\\config.txt"))
             {
                 String line;
 

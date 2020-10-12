@@ -11,7 +11,7 @@ namespace ExceptionManager
             return 0;
         }
 
-        public void IncrementErrorsCount()
+        public void IncrementErrorCounter()
         {
             return;
         }

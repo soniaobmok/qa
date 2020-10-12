@@ -12,14 +12,20 @@ namespace ExceptionManager
             return sendErrorCounter;
         }
 
-        public void IncrementErrorsCount()
+        public void IncrementErrorCounter()
         {
             sendErrorCounter++;
+
         }
 
         public Boolean Inform(Exception exception)
         {
-            return ExceptionServer.ReceiveException(exception.GetType().ToString());
+            Boolean result = ExceptionServer.ReceiveException(exception.GetType().ToString());
+
+            if (!result)
+                IncrementErrorCounter();
+
+            return result;
         }
     }
 }

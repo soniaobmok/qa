@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using NSubstitute;
 using System;
 using ExceptionManager;
 
@@ -77,6 +78,33 @@ namespace ExceptionManager.Tests
                 .GetStats().ordinary;
             //Assert
             Assert.That(result, Is.EqualTo(before + 1));
+        }
+
+        [Test, TestCaseSource("criticalExceptions")]
+        public void ErrorCounter_Increment(Exception ex)
+        {
+            UInt16 errorCounter = 0;
+            ICriticalExceptionInformer exceptionInformer = Substitute.For<ICriticalExceptionInformer>();
+
+            exceptionInformer.When(exceptionInformer => exceptionInformer.Inform(Arg.Any<Exception>()))
+                .Do(exceptionInformer => errorCounter++);
+
+            ExceptionManager manager = new ExceptionManager
+            {
+                ExceptionInformer = exceptionInformer
+            };
+
+            UInt16 before = errorCounter;
+
+            //// case success
+            //exceptionInformer.Inform(Arg.Any<Exception>()).Returns(true);
+            //manager.Inform(ex);
+            //Assert.That(errorCounter, Is.EqualTo(before));
+
+            // case error
+            exceptionInformer.Inform(Arg.Any<Exception>()).Returns(false);
+            manager.Inform(ex);
+            Assert.That(errorCounter, Is.EqualTo(before + 1));
         }
     }
 }

@@ -6,7 +6,7 @@ namespace ExceptionManager
 {
     public interface ICriticalExceptionInformer
     {
-        public void IncrementErrorsCount();
+        public void IncrementErrorCounter();
         public UInt16 GetErrorsCount();
         public Boolean Inform(Exception exception);
     }
