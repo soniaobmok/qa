@@ -28,6 +28,15 @@ namespace ExceptionManager.Tests
             new object[] {new IndexOutOfRangeException()},
         };
 
+        [Test]
+        public void Handle_NullArgument_ReturnsNothing()
+        {
+            //Act
+            Boolean result = managerTrue.Handle(null);
+            //Assert
+            Assert.That(result, Is.False);
+        }
+
         [Test, TestCaseSource("criticalExceptions")]
         public void Iscritical_criticalException_returnsTrue(Exception ex)
         {
@@ -86,8 +95,9 @@ namespace ExceptionManager.Tests
             UInt16 errorCounter = 0;
             ICriticalExceptionInformer exceptionInformer = Substitute.For<ICriticalExceptionInformer>();
 
-            exceptionInformer.When(exceptionInformer => exceptionInformer.Inform(Arg.Any<Exception>()))
-                .Do(exceptionInformer => errorCounter++);
+            //exceptionInformer.When(exceptionInformer => exceptionInformer.Inform(Arg.Any<Exception>()))
+            //    .Do(exceptionInformer => errorCounter++);
+
 
             ExceptionManager manager = new ExceptionManager
             {
@@ -105,6 +115,8 @@ namespace ExceptionManager.Tests
             exceptionInformer.Inform(Arg.Any<Exception>()).Returns(false);
             manager.Inform(ex);
             Assert.That(errorCounter, Is.EqualTo(before + 1));
+
+            
         }
     }
 }

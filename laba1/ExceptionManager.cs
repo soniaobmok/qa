@@ -28,6 +28,8 @@ namespace ExceptionManager
 
         public ExceptionManager Handle(Exception exception)
         {
+            if (exception == null)
+                return this;
             if (IsCritical(exception))
             {
                 critical++;
