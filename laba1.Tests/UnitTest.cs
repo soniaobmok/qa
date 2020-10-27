@@ -28,14 +28,17 @@ namespace ExceptionManager.Tests
             new object[] {new IndexOutOfRangeException()},
         };
 
-        //[Test]
-        //public void Handle_NullArgument_ReturnsNothing()
-        //{
-        //    //Act
-        //    Boolean result = managerTrue.Handle(null);
-        //    //Assert
-        //    Assert.That(result, Is.False);
-        //}
+        [Test]
+        public void Handle_NullArgument_ReturnsNothing()
+        {
+            ExceptionManager manager = new ExceptionManager{};
+            var before = manager.GetStats();
+            //Act
+            managerTrue.Handle(null);
+            //Assert
+            var after = manager.GetStats();
+            Assert.That(before, Is.EqualTo(after));
+        }
 
         [Test, TestCaseSource("criticalExceptions")]
         public void Iscritical_criticalException_returnsTrue(Exception ex)
