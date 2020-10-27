@@ -1,0 +1,3 @@
+﻿System.DivideByZeroException
+System.FormatException
+System.ArithmeticException
