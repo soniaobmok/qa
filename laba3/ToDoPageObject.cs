@@ -29,9 +29,6 @@ namespace laba3
             allFilterBtn = driver.FindElement(By.XPath("/html/body/ng-view/section/footer/ul/li[1]/a"));
             activeFilterBtn = driver.FindElement(By.XPath("/html/body/ng-view/section/footer/ul/li[2]/a"));
             completedFilterBtn = driver.FindElement(By.XPath("/html/body/ng-view/section/footer/ul/li[3]/a"));
-
-
-
         }
 
         public void Close()
@@ -46,7 +43,7 @@ namespace laba3
             return this;
         }
 
-        public ToDoPageObject AddSeveralTodos(List<string> todos)
+        public ToDoPageObject AddSeveralTodos(string[] todos)
         {
             foreach (string todo in todos)
             {
@@ -58,17 +55,12 @@ namespace laba3
 
         public bool ContainsTodo(string todoText)
         {
-            //todoList = driver.FindElement(By.XPath("/html/body/ng-view/section/section/ul"));
-
-            var createdTodoItems = todoList.FindElements(
-            By.XPath($"/html/body/ng-view/section/section/ul/li/div/label[text()={todoText}]"));
-            //Console.WriteLine("createdTodoItems.Count: " + createdTodoItems.Count);
-            //throw new Exception("aaaaaaaaaaaaaa" + createdTodoItems.Count);
+            var todoList = driver.FindElement(By.XPath("/html/body/ng-view/section/section/ul"));
+            var createdTodoItems = todoList.FindElements(By.XPath($"//label[text()='{todoText}']"));
             return createdTodoItems.Count > 0;
-            //return createdTodoItems.
         }
 
-        bool ContainsSeveralTodos(List<string> todos)
+        public bool ContainsSeveralTodos(string[] todos)
         {
             foreach (string todo in todos)
             {
@@ -102,7 +94,7 @@ namespace laba3
             return this;
         }
 
-        public ToDoPageObject CompleteSeveralTodos(List<string> todos)
+        public ToDoPageObject CompleteSeveralTodos(string[] todos)
         {
             foreach (string todo in todos)
             {
@@ -121,7 +113,7 @@ namespace laba3
             return this;
         }
 
-        public ToDoPageObject IncompleteSeveralTodos(List<string> todos)
+        public ToDoPageObject IncompleteSeveralTodos(string[] todos)
         {
             foreach (string todo in todos)
             {
@@ -164,19 +156,19 @@ namespace laba3
 
         public ToDoPageObject ApplyAllFilter()
         {
-            allFilterBtn.Click();
+            driver.FindElement(By.XPath("/html/body/ng-view/section/footer/ul/li[1]/a")).Click();
             return this;
         }
 
         public ToDoPageObject ApplyActiveFilter()
         {
-            activeFilterBtn.Click();
+            driver.FindElement(By.XPath("/html/body/ng-view/section/footer/ul/li[2]/a")).Click();
             return this;
         }
 
         public ToDoPageObject ApplyCompletedFilter()
         {
-            completedFilterBtn.Click();
+            driver.FindElement(By.XPath("/html/body/ng-view/section/footer/ul/li[3]/a")).Click();
             return this;
         }
 
