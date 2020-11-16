@@ -1,0 +1,123 @@
+{
+  "id": "f852a0ea-d040-4889-afc4-5800ec97a513",
+  "version": "2.0",
+  "name": "Borodin_Obmok_test",
+  "url": "https://rozetka.com.ua",
+  "tests": [{
+    "id": "dd4038a6-fa79-4e58-b457-e6ad363e4871",
+    "name": "Buy_Dell_xps15",
+    "commands": [{
+      "id": "6cd2635f-e775-4e95-92f0-90d54aa605fa",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cf5e38e4-86bc-4bb8-8396-58feae0e5c31",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1238x910",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "54c0edcc-222b-4161-bfe3-49a865662182",
+      "comment": "",
+      "command": "click",
+      "target": "name=search",
+      "targets": [
+        ["name=search", "name"],
+        ["css=.search-form__input", "css:finder"],
+        ["xpath=//input[@name='search']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "654b0f03-f735-43cc-9620-57aa9ed337d2",
+      "comment": "",
+      "command": "type",
+      "target": "name=search",
+      "targets": [
+        ["name=search", "name"],
+        ["css=.search-form__input", "css:finder"],
+        ["xpath=//input[@name='search']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Ноутбук Dell XPS 9575"
+    }, {
+      "id": "fe8bdfe8-b614-4960-ad3e-e0484657f463",
+      "comment": "",
+      "command": "click",
+      "target": "css=.search-form__submit",
+      "targets": [
+        ["css=.search-form__submit", "css:finder"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Найти')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8d3ecb1c-4ac8-4bb0-9882-bc34be1e950e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.catalog-grid__cell:nth-child(1) .goods-tile__title",
+      "targets": [
+        ["css=.catalog-grid__cell:nth-child(1) .goods-tile__title", "css:finder"],
+        ["xpath=//a[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Ноутбук Dell XPS 15 9575 (X558S2NDW-63S) Silver')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a26be9b7-c091-4dcb-a5a5-a66329c6ae39",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.socials__link_type_youtube use",
+      "targets": [
+        ["css=.socials__link_type_youtube use", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "63fca5a4-8f37-43bc-83b1-edf790968ed1",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.socials__link_type_youtube use",
+      "targets": [
+        ["css=.socials__link_type_youtube use", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "6a6e146b-0798-4967-9113-2efb8beb54fe",
+      "comment": "",
+      "command": "click",
+      "target": "css=.button_with_icon > .buy-button__label",
+      "targets": [
+        ["css=.button_with_icon > .buy-button__label", "css:finder"],
+        ["xpath=//app-buy-button/button/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Купить')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "505ecb80-94a0-45e8-b556-88917f17334e",
+      "comment": "",
+      "command": "assertText",
+      "target": "linkText=Ноутбук Dell XPS 15 9575 (X558S2NDW-63S) Silver",
+      "targets": [
+        ["linkText=Ноутбук Dell XPS 15 9575 (X558S2NDW-63S) Silver", "linkText"],
+        ["css=.cart-list__item:nth-child(1) .cart-product__title", "css:finder"],
+        ["xpath=(//a[contains(text(),'Ноутбук Dell XPS 15 9575 (X558S2NDW-63S) Silver')])[5]", "xpath:link"],
+        ["xpath=(//a[contains(@href, 'https://rozetka.com.ua/dell_x558s2ndw_63s/p46831448/')])[20]", "xpath:href"],
+        ["xpath=//rz-cart-product/div/div/div[2]/a", "xpath:position"]
+      ],
+      "value": "Ноутбук Dell XPS 15 9575 (X558S2NDW-63S) Silver "
+    }]
+  }],
+  "suites": [{
+    "id": "8982ef44-9c9c-48df-bab7-92cf8c780a65",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["dd4038a6-fa79-4e58-b457-e6ad363e4871"]
+  }],
+  "urls": ["https://rozetka.com.ua/"],
+  "plugins": []
+}
