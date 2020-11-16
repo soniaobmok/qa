@@ -14,21 +14,18 @@ namespace laba3
     public class ToDoPageObject
     {
         private IWebDriver driver;
-        private IWebElement todoInput;
-        private IWebElement todoList;
-        private IWebElement allFilterBtn;
-        private IWebElement activeFilterBtn;
-        private IWebElement completedFilterBtn;
+        private By todoInput = By.XPath("/html/body/ng-view/section/header/form/input");
+        private By todoList = By.XPath("/html/body/ng-view/section/section/ul");
+        private By allFilterBtn = By.XPath("/html/body/ng-view/section/footer/ul/li[1]/a");
+        private By activeFilterBtn = By.XPath("/html/body/ng-view/section/footer/ul/li[2]/a");
+        private By completedFilterBtn = By.XPath("/html/body/ng-view/section/footer/ul/li[3]/a");
+        private By clearButton = By.XPath("/html/body/ng-view/section/footer/button");
+        private By todoDeleteButton = By.XPath(".//div/button");
+        private By formInput = By.XPath(".//form/input");
 
-        public ToDoPageObject(IWebDriver driver)
+        public ToDoPageObject(IWebDriver webDriver)
         {
-            this.driver = driver;
-
-            todoInput = driver.FindElement(By.XPath("/html/body/ng-view/section/header/form/input"));
-            todoList = driver.FindElement(By.XPath("/html/body/ng-view/section/section/ul"));
-            allFilterBtn = driver.FindElement(By.XPath("/html/body/ng-view/section/footer/ul/li[1]/a"));
-            activeFilterBtn = driver.FindElement(By.XPath("/html/body/ng-view/section/footer/ul/li[2]/a"));
-            completedFilterBtn = driver.FindElement(By.XPath("/html/body/ng-view/section/footer/ul/li[3]/a"));
+            driver = webDriver;
         }
 
         public void Close()
@@ -38,37 +35,31 @@ namespace laba3
 
         public ToDoPageObject AddTodo(string todoText)
         {
-            todoInput.SendKeys(todoText);
-            todoInput.SendKeys(Keys.Return);
+            var input = driver.FindElement(todoInput);
+
+            input.SendKeys(todoText);
+            input.SendKeys(Keys.Return);
+            
             return this;
         }
 
         public ToDoPageObject AddSeveralTodos(string[] todos)
         {
-            foreach (string todo in todos)
-            {
-                AddTodo(todo);
-            }
-
+            foreach (string todo in todos) AddTodo(todo);
             return this;
         }
 
         public bool ContainsTodo(string todoText)
         {
-            var todoList = driver.FindElement(By.XPath("/html/body/ng-view/section/section/ul"));
-            var createdTodoItems = todoList.FindElements(By.XPath($"//label[text()='{todoText}']"));
+            var createdTodoItems = driver
+                .FindElement(todoList)
+                .FindElements(By.XPath($"//label[text()='{todoText}']"));
             return createdTodoItems.Count > 0;
         }
 
         public bool ContainsSeveralTodos(string[] todos)
         {
-            foreach (string todo in todos)
-            {
-                if (!ContainsTodo(todo))
-                {
-                    return false;
-                }
-            }
+            foreach (string todo in todos) if (!ContainsTodo(todo)) return false;
             return true;
         }
 
@@ -76,8 +67,9 @@ namespace laba3
         {
             if (ContainsTodo(todoText))
             {
-                var completedTodoItems = todoList.FindElements(
-                    By.XPath($".//li[div/label[text()='{todoText}'] and contains(@class, 'completed')]"));
+                var completedTodoItems = driver
+                    .FindElement(todoList)
+                    .FindElements(By.XPath($".//li[div/label[text()='{todoText}'] and contains(@class, 'completed')]"));
                 return completedTodoItems.Count > 0;
             } else
             {
@@ -87,8 +79,9 @@ namespace laba3
 
         public ToDoPageObject CompleteTodo(string todoText)
         {
-            todoList.FindElement(By.XPath(
-                $".//li[div/label[text()='{todoText}'] and not(contains(@class, 'completed'))]/div/input"))
+            driver
+                .FindElement(todoList)
+                .FindElement(By.XPath($".//li[div/label[text()='{todoText}'] and not(contains(@class, 'completed'))]/div/input"))
                 .Click();
 
             return this;
@@ -96,18 +89,15 @@ namespace laba3
 
         public ToDoPageObject CompleteSeveralTodos(string[] todos)
         {
-            foreach (string todo in todos)
-            {
-                CompleteTodo(todo);
-            }
-
+            foreach (string todo in todos) CompleteTodo(todo);
             return this;
         }
 
         public ToDoPageObject IncompleteTodo(string todoText)
         {
-            todoList.FindElement(By.XPath(
-                $".//li[div/label[text()='{todoText}'] and contains(@class, 'completed')]/div/input"))
+            driver
+                .FindElement(todoList)
+                .FindElement(By.XPath($".//li[div/label[text()='{todoText}'] and contains(@class, 'completed')]/div/input"))
                 .Click();
 
             return this;
@@ -115,37 +105,38 @@ namespace laba3
 
         public ToDoPageObject IncompleteSeveralTodos(string[] todos)
         {
-            foreach (string todo in todos)
-            {
-                IncompleteTodo(todo);
-            }
-
+            foreach (string todo in todos) IncompleteTodo(todo);
             return this;
         }
 
         public ToDoPageObject DeleteTodo(string todoText)
         {
-            var todoToHover = todoList.FindElement(By.XPath(
-                $".//li[div/label[text()='{todoText}']]"));
+            var todoToHover = driver
+                .FindElement(todoList)
+                .FindElement(By.XPath($".//li[div/label[text()='{todoText}']]"));
 
-            var hover = new Actions(driver).MoveToElement(todoToHover);
-            hover.Perform();
+            new Actions(driver)
+                .MoveToElement(todoToHover)
+                .Perform();
 
-            var deleteButton = todoToHover.FindElement(By.XPath(".//div/button"));
-            deleteButton.Click();
+            todoToHover
+                .FindElement(todoDeleteButton)
+                .Click();
 
             return this;
         }
 
         public ToDoPageObject EditTodo(string todoText, string editedTodoText)
         {
-            var todoToDoubleclick = todoList.FindElement(By.XPath(
-                $".//li[div/label[text()='{todoText}']]"));
+            var todoToDoubleclick = driver
+                .FindElement(todoList)
+                .FindElement(By.XPath($".//li[div/label[text()='{todoText}']]"));
 
-            var doubleclick = new Actions(driver).DoubleClick(todoToDoubleclick);
-            doubleclick.Perform();
+            new Actions(driver)
+                .DoubleClick(todoToDoubleclick)
+                .Perform();
 
-            var todoEditInput = todoToDoubleclick.FindElement(By.XPath(".//form/input"));
+            var todoEditInput = todoToDoubleclick.FindElement(formInput);
             todoEditInput.SendKeys(Keys.Control + "a");
             todoEditInput.SendKeys(Keys.Delete);
             todoEditInput.SendKeys(editedTodoText);
@@ -156,26 +147,36 @@ namespace laba3
 
         public ToDoPageObject ApplyAllFilter()
         {
-            driver.FindElement(By.XPath("/html/body/ng-view/section/footer/ul/li[1]/a")).Click();
+            driver
+                .FindElement(allFilterBtn)
+                .Click();
+
             return this;
         }
 
         public ToDoPageObject ApplyActiveFilter()
         {
-            driver.FindElement(By.XPath("/html/body/ng-view/section/footer/ul/li[2]/a")).Click();
+            driver
+                .FindElement(activeFilterBtn)
+                .Click();
+
             return this;
         }
 
         public ToDoPageObject ApplyCompletedFilter()
         {
-            driver.FindElement(By.XPath("/html/body/ng-view/section/footer/ul/li[3]/a")).Click();
+            driver
+                .FindElement(completedFilterBtn)
+                .Click();
+
             return this;
         }
 
         public ToDoPageObject ClearCompleted()
         {
-            driver.FindElement(By.XPath(
-                "/html/body/ng-view/section/footer/button")).Click();
+            driver
+                .FindElement(clearButton)
+                .Click();
 
             return this;
         }
