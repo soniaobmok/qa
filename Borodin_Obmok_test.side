@@ -1,0 +1,116 @@
+{
+  "id": "f852a0ea-d040-4889-afc4-5800ec97a513",
+  "version": "2.0",
+  "name": "Borodin_Obmok_test",
+  "url": "https://rozetka.com.ua",
+  "tests": [{
+    "id": "5710b10b-be14-4af9-a5be-aa677e27473a",
+    "name": "By_Dell_XPS_15_TEST",
+    "commands": [{
+      "id": "dfea2a27-f79d-46d4-84a2-a892814fdf6a",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1597b80d-32be-4882-8813-94c7bcb1a1e9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1000x800",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8671869f-0935-4f3d-af43-7a4cc63ee30f",
+      "comment": "",
+      "command": "click",
+      "target": "name=search",
+      "targets": [
+        ["name=search", "name"],
+        ["css=.search-form__input", "css:finder"],
+        ["xpath=//input[@name='search']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "93c3b2eb-08b7-4e3f-a348-37605cb7dcfb",
+      "comment": "",
+      "command": "type",
+      "target": "name=search",
+      "targets": [
+        ["name=search", "name"],
+        ["css=.search-form__input", "css:finder"],
+        ["xpath=//input[@name='search']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Ноутбук Dell XPS 15 9575"
+    }, {
+      "id": "995dfb07-63b6-4ec1-b0c2-40c1eecff5f4",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "name=search",
+      "targets": [
+        ["name=search", "name"],
+        ["css=.search-form__input", "css:finder"],
+        ["xpath=//input[@name='search']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "539e68c5-6c0c-454e-9a17-e1395b8663ab",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.catalog-grid__cell:nth-child(1) .goods-tile__title",
+      "targets": [
+        ["css=.catalog-grid__cell:nth-child(1) .goods-tile__title", "css:finder"],
+        ["xpath=//a[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Ноутбук Dell XPS 15 9575 (X578S3NDW-63S) Silver')]", "xpath:innerText"]
+      ],
+      "value": "Ноутбук Dell XPS 15 9575 (X578S3NDW-63S) Silver"
+    }, {
+      "id": "d13828ca-165a-4da7-954c-a50ec6c857ba",
+      "comment": "",
+      "command": "click",
+      "target": "css=.catalog-grid__cell:nth-child(1) .buy-button",
+      "targets": [
+        ["css=.catalog-grid__cell:nth-child(1) .buy-button", "css:finder"],
+        ["xpath=(//button[@type='button'])[8]", "xpath:attributes"],
+        ["xpath=//app-buy-button/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fb4bc53a-370d-4bd6-85dd-d74a77360796",
+      "comment": "",
+      "command": "click",
+      "target": "css=.catalog-grid__cell:nth-child(1) .buy-button",
+      "targets": [
+        ["css=.catalog-grid__cell:nth-child(1) .buy-button", "css:finder"],
+        ["xpath=(//button[@type='button'])[8]", "xpath:attributes"],
+        ["xpath=//app-buy-button/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8fbcc6aa-1f69-4aad-8334-44a7af310eb1",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.cart-product__title",
+      "targets": [
+        ["css=.cart-product__title", "css:finder"],
+        ["xpath=//a[contains(text(),'Ноутбук Dell XPS 15 9575 (X558S2NDW-63S) Silver')]", "xpath:link"],
+        ["xpath=(//a[contains(@href, 'https://rozetka.com.ua/dell_x558s2ndw_63s/p46831448/')])[4]", "xpath:href"],
+        ["xpath=//rz-cart-product/div/div/div[2]/a", "xpath:position"]
+      ],
+      "value": "Ноутбук Dell XPS 15 9575 (X578S3NDW-63S) Silver"
+    }]
+  }],
+  "suites": [{
+    "id": "8982ef44-9c9c-48df-bab7-92cf8c780a65",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["https://rozetka.com.ua/"],
+  "plugins": []
+}
