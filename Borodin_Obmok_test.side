@@ -64,9 +64,9 @@
       "targets": [
         ["css=.catalog-grid__cell:nth-child(1) .goods-tile__title", "css:finder"],
         ["xpath=//a[2]/span", "xpath:position"],
-        ["xpath=//span[contains(.,'Ноутбук Dell XPS 15 9575 (X558S2NDW-63S) Silver')]", "xpath:innerText"]
+        ["xpath=//span[contains(.,'Ноутбук Dell XPS 15 9575 (X578S3NDW-63S) Silver')]", "xpath:innerText"]
       ],
-      "value": "Ноутбук Dell XPS 15 9575 (X558S2NDW-63S) Silver"
+      "value": "Ноутбук Dell XPS 15 9575 (X578S3NDW-63S) Silver"
     }, {
       "id": "d13828ca-165a-4da7-954c-a50ec6c857ba",
       "comment": "",
@@ -100,7 +100,7 @@
         ["xpath=(//a[contains(@href, 'https://rozetka.com.ua/dell_x558s2ndw_63s/p46831448/')])[4]", "xpath:href"],
         ["xpath=//rz-cart-product/div/div/div[2]/a", "xpath:position"]
       ],
-      "value": "Ноутбук Dell XPS 15 9575 (X558S2NDW-63S) Silver"
+      "value": "Ноутбук Dell XPS 15 9575 (X578S3NDW-63S) Silver"
     }]
   }],
   "suites": [{
